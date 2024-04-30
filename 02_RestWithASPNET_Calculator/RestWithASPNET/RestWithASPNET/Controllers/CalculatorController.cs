@@ -66,6 +66,30 @@ namespace RestWithASPNET.Controllers
             return BadRequest("Invalid Input");
         }
 
+        [HttpGet("mean/{firstNumber}/{secondNumber}")]
+        public IActionResult GetMean(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var mean = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber)) / 2;
+                return Ok(mean.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("sqrt/{firstNumber}")]
+        public IActionResult GetSqrt(string firstNumber)
+        {
+            if (IsNumeric(firstNumber))
+            {
+                var sqrt = Math.Sqrt((double) ConvertToDecimal(firstNumber));
+                return Ok(sqrt.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
         private decimal ConvertToDecimal(string strNumber)
         {
             decimal decimalValue;
