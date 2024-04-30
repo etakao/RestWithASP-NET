@@ -16,6 +16,8 @@ builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
     new MySqlServerVersion(new Version(8, 0, 25))
 ));
 
+builder.Services.AddApiVersioning();
+
 builder.Services.AddScoped<IPersonService, PersonServiceImplementation>();
 
 var app = builder.Build();
