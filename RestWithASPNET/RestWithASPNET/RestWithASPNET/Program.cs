@@ -3,7 +3,6 @@ using RestWithASPNET.Model.Context;
 using RestWithASPNET.Business;
 using RestWithASPNET.Business.Implementations;
 using RestWithASPNET.Repository;
-using RestWithASPNET.Repository.Implementations;
 using EvolveDb;
 using MySqlConnector;
 using Serilog;
