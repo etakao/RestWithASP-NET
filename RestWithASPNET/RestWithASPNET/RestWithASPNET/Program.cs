@@ -8,6 +8,8 @@ using MySqlConnector;
 using Serilog;
 using RestWithASPNET.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using RestWithASPNET.Hypermedia.Filters;
+using RestWithASPNET.Hypermedia.Enricher;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,11 @@ builder.Services.AddMvc(options =>
 })
 .AddXmlSerializerFormatters();
 
+var filterOptions = new HyperMediaFilterOptions();
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+
+builder.Services.AddSingleton(filterOptions);
+
 builder.Services.AddApiVersioning();
 
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
@@ -51,6 +58,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapControllerRoute("DefaultApi", "{controller=Values}/{id?}");
 
 app.Run();
 
