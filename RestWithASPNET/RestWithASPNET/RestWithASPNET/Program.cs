@@ -59,7 +59,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapControllerRoute("DefaultApi", "{controller=Values}/{id?}");
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app.Run();
 
