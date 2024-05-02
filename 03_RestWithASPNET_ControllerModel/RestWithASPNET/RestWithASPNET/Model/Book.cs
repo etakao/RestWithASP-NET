@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using RestWithASPNET.Model.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestWithASPNET.Model
 {
     [Table("book")]
-    public class Book
+    public class Book : BaseEntity
     {
         [Column("id")]
         public long Id { get; set; }
