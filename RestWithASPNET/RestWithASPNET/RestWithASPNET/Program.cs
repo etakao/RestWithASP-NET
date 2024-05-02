@@ -35,6 +35,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 builder.Services.AddControllers();
 
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
@@ -74,6 +80,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseSwagger();
 
