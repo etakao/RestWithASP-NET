@@ -6,5 +6,6 @@ namespace RestWithASPNET.Business
     {
         TokenVO ValidateCrendentials(UserVO user);
         TokenVO ValidateCredentials(TokenVO token);
+        bool RevokeToken(string username);
     }
 }

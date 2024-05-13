@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
@@ -40,6 +41,19 @@ namespace RestWithASPNET.Controllers
             if (token == null) return Unauthorized();
 
             return Ok(token);
+        }
+
+        [HttpPost]
+        [Authorize("Bearer")]
+        [Route("revoke")]
+        public IActionResult Revoke()
+        {
+            var username = User.Identity.Name;
+            var result = _loginBusiness.RevokeToken(username);
+
+            if (!result) return BadRequest("Invalid client request.");
+
+            return NoContent();
         }
     }
 }
