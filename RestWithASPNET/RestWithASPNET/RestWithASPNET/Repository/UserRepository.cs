@@ -16,7 +16,7 @@ namespace RestWithASPNET.Repository
             _context = context;
         }
 
-        public User ValidadeCredentials(UserVO user)
+        public User ValidateCredentials(UserVO user)
         {
             var pass = ComputeHash(user.Password, SHA256.Create());
             return _context.Users.FirstOrDefault(u => (u.UserName == user.UserName) && (u.Password == pass));

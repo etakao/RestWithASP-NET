@@ -2,7 +2,7 @@
 
 namespace RestWithASPNET.Services
 {
-    public interface ITokenInterface
+    public interface ITokenService
     {
         string GenerateAccessToken(IEnumerable<Claim> claims);
         string GenerateRefreshToken();

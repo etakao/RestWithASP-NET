@@ -5,6 +5,6 @@ namespace RestWithASPNET.Repository
 {
     public interface IUserRepository
     {
-        User ValidadeCredentials(UserVO user);
+        User ValidateCredentials(UserVO user);
     }
 }
