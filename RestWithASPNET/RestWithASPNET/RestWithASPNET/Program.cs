@@ -4,7 +4,6 @@ using RestWithASPNET.Business;
 using RestWithASPNET.Business.Implementations;
 using RestWithASPNET.Repository;
 using EvolveDb;
-using MySqlConnector;
 using Serilog;
 using RestWithASPNET.Repository.Generic;
 using Microsoft.Net.Http.Headers;
@@ -12,6 +11,7 @@ using RestWithASPNET.Hypermedia.Filters;
 using RestWithASPNET.Hypermedia.Enricher;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 var appName = "REST API's RESTful with ASP.NET Core 8 and Docker";
@@ -43,12 +43,9 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
 }));
 builder.Services.AddControllers();
 
-var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
+var connection = builder.Configuration["MSSQLServerConnection:MSSQLServerConnectionString"];
 
-builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
-    connection,
-    new MySqlServerVersion(new Version(8, 0, 25))
-));
+builder.Services.AddDbContext<MSSQLContext>(options => options.UseSqlServer(connection));
 
 if (builder.Environment.IsDevelopment())
 {
@@ -106,7 +103,7 @@ void MigrateDatabase(string connection)
 {
     try
     {
-        var evolveConnection = new MySqlConnection(connection);
+        var evolveConnection = new SqlConnection(connection);
         var evolve = new Evolve(evolveConnection, Log.Information)
         {
             Locations = new List<string> { "db/migrations", "db/dataset" },
