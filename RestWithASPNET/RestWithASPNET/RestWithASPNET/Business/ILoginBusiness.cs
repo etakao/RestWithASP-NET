@@ -5,6 +5,6 @@ namespace RestWithASPNET.Business
     public interface ILoginBusiness
     {
         TokenVO ValidateCrendentials(UserVO user);
-
+        TokenVO ValidateCredentials(TokenVO token);
     }
 }
