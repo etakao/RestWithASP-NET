@@ -1,14 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestWithASPNET.Model;
 using RestWithASPNET.Model.Base;
 using RestWithASPNET.Model.Context;
-using System;
 
 namespace RestWithASPNET.Repository.Generic
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private MSSQLContext _context;
+        protected MSSQLContext _context;
 
         private DbSet<T> dataset;
 
